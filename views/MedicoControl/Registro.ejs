@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuarios</title>
+    <link rel="stylesheet" href="/css/styleControl.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div class="Container">
+        <%- include("navbarControl")%>
+
+        
+        <div class="Consul">
+            <h1>Registro de Usuario</h1>
+            <form action="/registrar" id="registrar" method="post">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese los nombres" required>
+
+                <label for="nombre">Apellido</label>
+                <input type="text" id="apellido" name="apellido" placeholder="Ingrese los apellidos" required>
+
+                <label for="nombre">Fecha de Nacimiento</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Ingrese la fecha de nacimiento" required>
+
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="Ingrese el correo electrónico" required>
+
+                
+                <label for="role">Selecciona el rol:</label>
+                <select id="role" name="role" required>
+                    <% for (var i = 0; i < tipousuario.length; i++) { %>
+                    <option value="<%= tipousuario[i].idTipoUsuario %>"> <%= tipousuario[i].Nombre %></option>
+                    <% } %>
+                </select>
+                
+                <label for="genero">Selecciona tu genero tradicional:</label>
+                <select id="genero" name="genero" required>
+                    <option value="f">Femenino</option>
+                    <option value="m">Masculino</option>
+                </select>
+
+                <button id="btn_MedicR" type="submit">Registrarse</button>
+            </form>
+        </div>
+    </div>    
+    <script src="./js/btn.js"></script>
+</body>
+</html>

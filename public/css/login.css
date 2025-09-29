@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal del login */
+.login-container {
+    display: flex;
+    width: 800px;
+    height: 500px;
+    background-color: #d3d3d3;  /* ✅ Color gris */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* ✅ Sección de la imagen */
+.image-section {
+    width: 55%;  /* ✅ Más ancha */
+    height: 100%;  /* ✅ Llena la altura del contenedor */
+    background: url('/images/medico.png') no-repeat center center;
+    background-size: cover; /* ✅ Se ajusta completamente */
+}
+
+/* ✅ Sección del formulario */
+.form-section {
+    width: 45%;  /* ✅ Un poco más estrecho */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Ícono del login */
+.icon-circle {
+    font-size: 50px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+/* Estilo del formulario */
+h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botón de inicio de sesión */
+button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #34495e;
+}
+
+/* Texto de registro */
+.register-text {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-text a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}

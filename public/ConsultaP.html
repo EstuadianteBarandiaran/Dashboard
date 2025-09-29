@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicoControl</title>
+    <link rel="stylesheet" href="/css/styleMedico.css">
+</head>
+<body>
+        
+        <div class="Container">
+            <%- include("navbarMedico")%>
+                <div class="Consultas">
+                    <div class="Consulta">
+                        <h2>Paciente </h2>
+                        <div>
+                            <p>Motivo de consultas: Dolor de cabeza</p>
+                            <p>Sintomas: temperatura, dolor de cuello,</p>
+                            <p>Alergias: ninguna</p>
+                            <p>Cirugias previas: un molar </p>
+                            <p>hospitalizaciones previas: no </p>
+                        </div>
+                        <div class="Operaciones">
+                            <button class="open-modal">Receta</button>
+                            <button>Ver Consulta</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        
+        <!-- Modal -->
+        <div id="recetaModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Receta Médica</h2>
+                <form>
+                    <label for="observaciones">Observaciones:</label>
+                    <input type="text" id="observaciones" name="observaciones" required><br><br>
+                    <label for="medicamento">Medicamento:</label>
+                    <input type="text" id="medicamento" name="medicamento" required><br><br>
+                    <label for="dosis">Dosis:</label>
+                    <input type="text" id="dosis" name="dosis" required><br><br>
+                    <button type="submit">Enviar Receta</button>
+                </form>
+            </div>
+        </div>
+    
+        <script>
+            const modal = document.getElementById("recetaModal");
+            const btns = document.querySelectorAll(".open-modal");
+            const span = document.querySelector(".close");
+    
+            btns.forEach(btn => {
+                btn.onclick = function() {
+                    modal.style.display = "flex";
+                }
+            });
+    
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+    
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+</body>
+</html>

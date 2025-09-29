@@ -1,0 +1,764 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+/*estilos generales*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Quicksand", sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/*layout*/
+.menu-dashboard {
+    position: fixed;
+    width: 100px; 
+    height: 100vh;
+    background: #264150;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo */
+.top-menu {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+}
+
+/* estilos del menú */
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.enlace {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+.enlace:hover {
+    background:#4A707A ;
+}
+.enlace a {
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+    height: 100%;
+    text-decoration: none; 
+    color: inherit; 
+    padding: 10px; 
+}
+
+.enlace i {
+    color: white;
+    font-size: 20px;
+}
+
+.enlace::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #4A707A;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    font-weight: bold;
+     font-family: "Quicksand", sans-serif !important; 
+}
+
+.enlace:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+/*aqui acaban los estilos del menu*/
+
+/* Contenedor */
+.Container {
+    display: flex;
+    margin-left: 190px;
+    min-height: 100vh;
+}
+
+.Bienvenida {
+    margin-left: 270px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 25px auto;
+    text-align: center;
+}
+
+.Bienvenida label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #2c3e50;
+}
+
+/* Campos editables */
+.Bienvenida input {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Botón de guardado */
+.Bienvenida button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition:  0.3s;
+}
+
+.Bienvenida button:hover {
+    background-color: #34495e;
+}
+/* Sección de Consulta */
+.Consulta {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Estilos de títulos y etiquetas */
+/* Sección de Consulta */
+.Consulta {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* Asegura misma altura */
+    min-width: 100%
+}
+
+.Consulta h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.Consulta label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #2c3e50;
+    width: 100%;
+    text-align: left;
+}
+
+/* Estilos de inputs y selects */
+.Consulta input,
+.Consulta select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background: transparent; /* Hace que el input sea más limpio */
+}
+
+.Consulta input::placeholder {
+    color: #50657f;
+}
+
+/* Botón de guardado */
+.Consulta button {
+    background-color: #264150;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+.Consulta button:hover {
+    background-color:#4b949c;
+}
+.Consulta h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #264150;
+    min-height: 40px; /* Fija altura para títulos */
+}
+
+.Consulta p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Empuja los botones hacia abajo */
+}
+
+.content {
+    margin-right: 27px;
+    width: calc(100% - 270px);
+    padding: 40px;
+
+}
+
+.add-user-btn {
+    margin-bottom: 20px;
+    background-color: #34495e;
+    color: white;
+    font-size: 16px;
+}
+
+.add-user-btn i {
+    margin-right: 8px;
+}
+
+.Operaciones {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.Operaciones button {
+    background: #346473;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background 0.3s ease;
+}
+
+.Operaciones button:hover {
+    background: #72d0ca;
+}
+
+/* Estilos para los botones con distintas acciones */
+.Operaciones button:nth-child(2) {
+    background: #4b949c;
+}
+
+.Operaciones button:nth-child(2):hover {
+    background: #264150;
+}
+
+h1{
+    font-size: 30px;
+    color: #264150;
+    text-align: center;
+
+}
+h2{
+    font-size: 20px;
+    color: #264150;
+    text-align: center;
+
+}
+p{
+    font-size: 15px;
+    color: #264150;
+    text-align: center;
+}
+label{
+    font-size: 15px;
+    color: #264150;
+    text-align: center;
+}
+select{
+    font-size: 15px;
+    color: #264150;
+    text-align: center;
+}
+
+
+table { 
+    width: 130%;
+    border-collapse: collapse;
+    margin-top: 20px; 
+    overflow: hidden;
+}
+
+th, td, tr {
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: center; 
+    color: #2c3e50;
+    font-weight: bold;
+
+}
+th {
+     background: #2c3e50;
+     color: white; 
+}
+button {
+     padding: 10px 15px;
+     margin: 5px; 
+     background: #2c3e50; 
+     color: white;
+      border: none; 
+      cursor: pointer; 
+}
+
+.btn-outline-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-outline-danger {
+    background-color: #dc3545;
+    color: white;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el modal */
+}
+
+.modal-content h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    font-size: 16px;
+    color: #34495e;
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #34495e;
+}
+/* Fondo oscuro y bordes redondeados */
+.mi-alerta {
+    background-color: #2c3e50 !important;
+    color: white !important;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+/* Estilo del título */
+.mi-titulo {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Quicksand", sans-serif;
+    color: #facc15 !important;
+}
+
+/* Botón con diseño personalizado */
+.mi-boton {
+    background-color: #22c55e !important;
+    color: white !important;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: "Quicksand", sans-serif;
+}
+
+.Consultas {
+    margin-left: 230px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; /* Espacio entre tarjetas */
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 90%;
+    margin: 40px auto;
+}
+.Consultas > h1 {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #264150;
+    font-size: 30px;
+}
+
+.Consultas h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.Consultas label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #2c3e50;
+    width: 100%;
+    text-align: left;
+}
+
+.Consultas input,
+.Consultas select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.Consultas input::placeholder {
+    color: #aaa;
+}
+
+/* Botón de guardado */
+.Consultas button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+.Consultas button:hover {
+    background-color: #34495e;
+}
+
+
+.Consul {
+    margin-left: 270px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.Consul h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.Consul label {
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #2c3e50;
+    width: 100%;
+    text-align: left;
+}
+
+.Consul input,
+.Consul select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.Consul input::placeholder {
+    color: #aaa;
+}
+
+/* Botón de guardado */
+.Consul button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+.Consul button:hover {
+    background-color: #34495e;
+}
+
+/* Estilos mejorados para gráficas */
+.charts {
+    max-width: 1400px; /* Aumenté el ancho máximo */
+    margin: 30px auto;
+    background-color: #f8f4e9;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0d6c2;
+}
+
+.chart_types {
+    margin-bottom: 30px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; 
+}
+
+.chart_types button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4a6fa5;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px; /* Ancho mínimo para consistencia */
+}
+
+.chart_types button:hover {
+    background-color: #3a5a80;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+.Containerss {
+    display: flex;
+    margin-left: 120px;
+    margin-right: 15px;
+    min-height: 100vh;
+}
+
+
+/* Contenedor principal de gráficas */
+.mmm {
+    margin-top: 0;
+    padding-top: 0;
+    display: grid;
+    width: 100%;
+    height: auto;
+    margin: 20px auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    grid-template-columns: 1fr; /* Por defecto una columna en móvil */
+    grid-template-rows: auto;
+    gap: 30px; /* Más espacio entre elementos */
+    padding: 20px;
+    background-color: white;
+}
+
+/* Media query para pantallas más grandes */
+@media (min-width: 1024px) {
+    .mmm {
+        grid-template-columns: 1fr 1fr; /* Dos columnas en desktop */
+    }
+    
+    /* Ajustes específicos para posicionamiento en desktop */
+    .hijo0 {
+        grid-column: 1 / -1;
+    }
+    
+    .hijo1, .hijo2 {
+        grid-row: 2;
+    }
+    
+    .hijo3 {
+        grid-column: 1 / -1;
+        grid-row: 3;
+    }
+    .hijo {
+        grid-column: 1 / -1;
+       
+    }
+}
+
+/* Contenedores de gráficas individuales */
+.chart-container {
+    width: 100%;
+    height: 400px; /* Altura fija para consistencia */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 0;
+    border: 1px solid #e0d6c2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Canvas de las gráficas */
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 300px; /* Altura mínima para evitar que se vean muy pequeñas */
+}
+
+/* Títulos para las gráficas */
+.chart-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.hijo2 {
+    margin-left: 30px;
+    height: 450px; 
+    width: 470px;
+    display: flex;
+    object-fit: cover;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;/* Puedes ajustar la altura según prefieras */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #BECCC2;
+    transition: all 0.3s ease;
+}
+/* Reducir la altura de hijo1 y hijo2 */
+.hijo1{
+    margin-left: 30px;
+    height: 450px; 
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;/* Puedes ajustar la altura según prefieras */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #BECCC2;
+    transition: all 0.3s ease;
+}
+
+.hijo3, .hijo4 {
+    margin-left: 150px;
+    width: 810px;
+    height: 430px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;/* Puedes ajustar la altura según prefieras */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #BECCC2;
+    transition: all 0.3s ease;
+}
+
+/* Hacer que hijo4 ocupe toda la fila */
+@media (min-width: 1024px) {
+    .hijo4 {
+        grid-column: 1 / -1; /* Ocupará todas las columnas disponibles */
+    }
+}
+
+/* Clases específicas para cada contenedor */
+.hijo0 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    padding: 10px;
+}
+ .hijo1:hover, .hijo2:hover, .hijo3:hover, .hijo4:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Colores de fondo diferenciados */
+.hijo0 { background-color:   white; }
+.hijo1 { background-color: #f9f9f9; }
+.hijo2 { background-color: #f9f9f9; }
+.hijo3 { background-color: #f9f9f9; }
+.hijo4 { background-color: #f9f9f9; }
+
+

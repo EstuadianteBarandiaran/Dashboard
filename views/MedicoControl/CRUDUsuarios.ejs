@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Usuarios</title>
+    <link rel="stylesheet" href="/css/styleControl.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body >
+    <center>
+    <div class="Container" >
+        <%- include("navbarControl")%>
+        <div class="content" style="margin-left: 100px !important; ">
+            <h1 style="font-weight: bold; color: #264150; font-size: 30px;">Control de usuarios</h1>
+            
+            <!-- Pestañas -->
+            <ul class="nav nav-tabs" id="userTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="patients-tab" data-bs-toggle="tab" data-bs-target="#patients" type="button" style=" font-size: 18px; color:#264150;">Pacientes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="doctors-tab" data-bs-toggle="tab" data-bs-target="#doctors" type="button" style=" font-size: 18px; color:#264150;">Doctores</button>
+                </li>
+            </ul>
+            
+            <!-- Contenido de las pestañas -->
+            <div class="tab-content" id="userTabsContent">
+                <!-- Pestaña de Pacientes -->
+                <div class="tab-pane fade show active" id="patients" role="tabpanel">
+                    <div class="search-container">
+                        <input type="text" id="patientSearch"  style=" font-size: 18px;  color:#264150;"class="form-control" placeholder="Buscar pacientes..." >
+                    </div>
+                    <table class="table table-striped table-hover ">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Género</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patientsTable">
+                            <!-- Los pacientes se cargarán aquí -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pestaña de Doctores -->
+                <div class="tab-pane fade" id="doctors" role="tabpanel">
+                    <div class="search-container">
+                        <input type="text" id="doctorSearch" class="form-control" placeholder="Buscar doctores...">
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Género</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="doctorsTable">
+                            <!-- Los doctores se cargarán aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar usuario -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <input type="hidden" id="editUserId">
+                        <div class="mb-3">
+                            <label for="editName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="editName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editLastName" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="editLastName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="editEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editBirthDate" class="form-label">Fecha Nacimiento</label>
+                            <input type="date" class="form-control" id="editBirthDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editGender" class="form-label">Género</label>
+                            <select class="form-select" id="editGender" required>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="O">Otro</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="saveChanges">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+    <!-- Modal de confirmación para eliminar -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+    let selectedUserId = null;
+    let selectedUserRole = null;
+    
+    loadPatients();
+    loadDoctors();
+
+    $('#patientSearch').on('keyup', function() {
+        const searchText = $(this).val().toLowerCase();
+        $('#patientsTable tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
+        });
+    });
+
+    $('#doctorSearch').on('keyup', function() {
+        const searchText = $(this).val().toLowerCase();
+        $('#doctorsTable tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
+        });
+    });
+
+    function formatDate(dateString) {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        let month = (date.getMonth() + 1).toString().padStart(2, '0');
+        let day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    $('#editUserModal').on('show.bs.modal', function(event) {
+        const button = $(event.relatedTarget);
+        const userId = button.data('id');
+        const userRole = button.data('role');
+
+        selectedUserId = userId;  // Ahora se asigna correctamente
+        selectedUserRole = userRole;
+
+        $.get(`/api/users/${userId}`, function(user) {
+            $('#editUserId').val(user.idUsers);
+            $('#editName').val(user.Nombres);
+            $('#editLastName').val(user.Apellido);
+            $('#editEmail').val(user.Correo);
+            $('#editBirthDate').val(formatDate(user.fecha_nacimiento));
+
+            let genderValue = user.Genero;
+            if (genderValue === "M") genderValue = "M";
+            if (genderValue === "F") genderValue = "F";
+            if (genderValue === "O") genderValue = "O";
+        });
+    });
+
+    function loadPatients() {
+        const role = 3;
+        const url = `/api/users?role=${encodeURIComponent(role)}`;
+
+        console.log("Cargando pacientes desde:", url);
+
+        $.get(url, function(patients) {
+            const tableBody = $('#patientsTable');
+            tableBody.empty();
+            
+            if (!patients || patients.length === 0) {
+                tableBody.append('<tr><td colspan="6" class="text-center">No hay pacientes registrados</td></tr>');
+                return;
+            }
+            
+            patients.forEach(patient => {
+                if (Number(patient.id_Rol) === role) {
+                    tableBody.append(`
+                    <tr data-id="${patient.idUsers}">
+                        <td>${patient.idUsers}</td>
+                        <td>${patient.Nombres} ${patient.Apellido}</td>
+                        <td>${patient.Correo}</td>
+                        <td>${patient.fecha_nacimiento}</td>
+                        <td>${patient.Genero}</td>
+                        <td>
+                              <button class="btn btn-sm btn-outline-primary edit-btn" 
+                            data-bs-toggle="modal" data-bs-target="#editUserModal"
+                            data-id="${patient.idUsers}" data-role="${patient.id_Rol}">
+                            <i class='bx bxs-edit-alt'></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger delete-btn "
+                            data-id="${patient.idUsers}" data-role="${patient.id_Rol}">
+                            <i class='bx bxs-trash'></i>
+
+                        </td>
+                    </tr>
+                    `);
+                }
+            });
+        }).fail(function(err) {
+            console.error("Error al cargar pacientes:", err);
+            $('#patientsTable').html('<tr><td colspan="6" class="text-center text-danger">Error al cargar pacientes</td></tr>');
+        });
+    }
+
+    function loadDoctors() {
+        const role = 2;
+        const url = `/api/users?role=${encodeURIComponent(role)}`;
+
+        console.log("Cargando doctores desde:", url);
+
+        $.get(url, function(doctors) {
+            const tableBody = $('#doctorsTable');
+            tableBody.empty();
+            
+            if (!doctors || doctors.length === 0) {
+                tableBody.append('<tr><td colspan="6" class="text-center">No hay doctores registrados</td></tr>');
+                return;
+            }
+            
+            doctors.forEach(doctor => {
+                if (Number(doctor.id_Rol) === role) {
+                    tableBody.append(`
+                    <tr data-id="${doctor.idUsers}">
+                        <td>${doctor.idUsers}</td>
+                        <td>${doctor.Nombres} ${doctor.Apellido}</td>
+                        <td>${doctor.Correo}</td>
+                        <td>${doctor.fecha_nacimiento}</td>
+                        <td>${doctor.Genero}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary edit-btn" 
+                                data-bs-toggle="modal" data-bs-target="#editUserModal"
+                                data-id="${doctor.idUsers}" data-role="${doctor.id_Rol}">
+                                <i class='bx bxs-edit-alt'></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger delete-btn"
+                                data-id="${doctor.idUsers}" data-role="${doctor.id_Rol}">
+                                <i class='bx bxs-trash'></i>
+                            </button>
+                        </td>
+                    </tr>
+                    `);
+                }
+            });
+        }).fail(function(err) {
+            console.error("Error al cargar doctores:", err);
+            $('#doctorsTable').html('<tr><td colspan="6" class="text-center text-danger">Error al cargar doctores</td></tr>');
+        });
+    }
+});
+
+    </script>
+    <script src="/js/btn.js" defer></script>
+</body>
+</html>

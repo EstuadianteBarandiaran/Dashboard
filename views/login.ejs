@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="script.js" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <!-- ✅ Sección de la imagen -->
+        <div class="image-section">
+            <img src="https://clinica25demayo.com.ar/wp-content/uploads/especialidades-12-clinica-medica.jpg" alt="Imagen de fondo">
+        </div>
+    
+        <!-- ✅ Sección del formulario -->
+        <div class="form-section">
+            <div class="icon-circle">
+                <ion-icon name="heart-circle"></ion-icon>
+            </div>
+            <h2>Iniciar Sesión</h2>
+            <form id="login" action="/login" method="post">
+                <div class="input-group">
+                    <label for="email">Ingrese su correo</label>
+                    <input type="text" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Ingrese su contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>    
+</body>
+</html>

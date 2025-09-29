@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicoControl</title>
+    <link rel="stylesheet" href="/css/styleMedico.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="Container">
+        <%- include("navbarMedico")%>
+        
+        <div class="Bienvenida">
+                <h1>Bienvenido Dr. <%= nombre %> </h1>
+            <div class="Consultas">
+                <% if (ConsultaPaciente.length === 0) { %>
+                    <p style="text-align: center; color: black; font-weight: bold;">
+                        No hay consultas asignadas por el momento...
+                    </p>
+                <% } else { %>
+                    <% for (var i = 0; i < ConsultaPaciente.length; i++) { %>
+                        <div class="Consulta">
+                            <h2>Paciente <%= ConsultaPaciente[i].Nombre %></h2>
+                            <div>
+                                <p>Motivo: <%= ConsultaPaciente[i].Motivo %></p>
+                            </div>
+                            <div class="Operaciones">
+                                <button onclick="window.location.href='/ConsultaP?id=<%= ConsultaPaciente[i].idConsulta %>'">Ver Consulta</button>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+        </div> 
+    </div>
+</body>
+</html>

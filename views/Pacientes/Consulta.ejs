@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Paciente</title>
+    <link rel="stylesheet" href="/css/stylePacientes.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("ConsultaP").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita el envío automático
+            
+            Swal.fire({
+                title: "¡Sugerencia enviada!",
+                text: "Tu sugerencia ha sido registrada con éxito.",
+                icon: "success",
+                confirmButtonText: "Entendido",
+                customClass: {
+                    popup: 'mi-alerta',  
+                    title: 'mi-titulo',
+                    confirmButton: 'mi-boton'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Envía el formulario
+                    document.getElementById("ConsultaP").submit();
+                    // Resetea el formulario después de un pequeño retraso
+                    setTimeout(() => {
+                        document.getElementById("ConsultaP").reset();
+                    }, 500);
+                }
+            });
+        });
+    });
+    
+    
+</script>
+<body>
+    <div class="Container">
+        <%- include("navbarPaciente")%>
+        <div class="Consulta" style="margin-top: 0%;">
+            <h1>Hola! genera tu consulta</h1>
+            <form method="post" action="/ConsultaRegistro" id="ConsultaP" >
+                <label>Motivo de Consulta</label>
+                <input type="text" placeholder="Ingresa tu Motivo" name="motivo" required>
+                <label>Sintomas</label>
+                <input type="text" placeholder="Ingresa tus sintomas" name="sintomas" required>
+                <label>Alergias</label>
+                <input type="text" placeholder="Ingresa tus alergias" name="alergias" required>
+                <label>Cirugias previas</label>
+                <input type="text" placeholder="Ingresa si has tenido cirugias previas y cuales" name="cirugias" required>
+                <label>Hospitalizaciones previas</label>
+                <input type="text" placeholder="Ingresa si has tenido hospitalizaciones previas y cuales" name="hospitalizaciones" required>
+                <label>Consumo de tabaco</label>
+                <select id="tabaco" name="tabaco" required>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+                <label>Consumo de Alcohol</label>
+                <select id="alcohol" name="alcohol" required>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+                <label>Dirección</label>
+                <input type="text" placeholder="Ingresa tu direccion" name="direccion" required>
+                <button type="submit">Enviar consulta</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

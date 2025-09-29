@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicoControl</title>
+    <link rel="stylesheet" href="/css/styleMedico.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="Container">
+        <%- include("navbarMedico")%>
+        
+    
+        <!-- Sección de perfil con edición -->
+        <div class="Bienvenida">
+            <form action="/Sugerir" method="post" id="sugerenciaForm">
+                <h1>Quejas y Sugerencias</h1>
+                
+                <label for="Motivo">Motivo</label>
+                <input type="text" id="Motivo" name="Motivo" placeholder="Ingresa el motivo como título" required>
+            
+                <label for="Descripcion">Descripción</label>
+                <input type="text" id="Descripcion" name="Descripcion" placeholder="Ingresa toda la descripción" required>
+            
+                <button type="submit" id="btn_enviarC">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <script src="./js/btn.js"></script>
+    </div>
+
+    
+
+</body>
+</html>

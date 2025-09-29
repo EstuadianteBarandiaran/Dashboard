@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicoControl</title>
+    <link rel="stylesheet" href="/css/styleControl.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div class="Container">
+        <%- include("navbarControl") %>
+        <div class="Consultas" style="margin-right: 50px;">
+            <h1 style=" font-family: Quicksand, sans-serif; font-weight: bold;">Asignación de Consultas</h1>
+            <% if (ConsultaPaciente.length === 0) { %>
+                <center>
+                    <p style="text-align: center;">
+                        No se encuentran consultas por el momento
+                    </p>
+                </center>
+            <% } else { %>
+                <% for (var i = 0; i < ConsultaPaciente.length; i++) { %>
+                    <div class="Consulta" style=" font-family: Quicksand, sans-serif;" >
+                        <h2>Elección del doctor</h2>
+                        <h2>Paciente <%= ConsultaPaciente[i].Nombre %></h2>
+                        <div>
+                            <p>Motivo: <%= ConsultaPaciente[i].Motivo %></p>
+                        </div>
+                        <div class="Operaciones">
+                            <button class="notificar-btn" 
+                            data-nombre="<%= ConsultaPaciente[i].Nombre %>"
+                            data-motivo="<%= ConsultaPaciente[i].Motivo %>"
+                            data-sintomas="<%= ConsultaPaciente[i].Sintomas %>"
+                            data-id="<%= ConsultaPaciente[i].idHistorialClinico %>"
+                            data-nose="<%= ConsultaPaciente[i].idConsulta %>"
+                            >Escoger Doctor</button>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+            <% if (ConsultaReceta.length === 0) { %>
+                <center>
+                    <p style="text-align: center;">
+                        No se encuentran recetas por aceptar 
+                    </p>
+                </center>
+
+            <% } else { %>
+                <% for (var i = 0; i < ConsultaReceta.length; i++) { %>
+                    <div class="Consulta" style=" font-family: Quicksand, sans-serif;">
+                        <h2>Aceptar Receta</h2>
+                        <h2>Paciente <%= ConsultaReceta[i].Nombre %></h2>
+                        <div>
+                            <p>Motivo: <%= ConsultaReceta[i].Motivo %></p>
+                        </div>
+                        <div class="Operaciones">
+                            <button class="AceptarRecetas" 
+                            data-nombre1="<%= ConsultaReceta[i].Nombre %>"
+                            data-motivo1="<%= ConsultaReceta[i].Motivo %>"
+                            data-sintomas1="<%= ConsultaReceta[i].Sintomas %>"
+                            data-id1="<%= ConsultaReceta[i].idHistorialClinico %>"
+                            data-nosedos="<%= ConsultaReceta[i].idConsulta %>"
+                            data-diagnostico="<%= ConsultaReceta[i].Diagnostico %>"
+                            data-tratamiento="<%= ConsultaReceta[i].Tratamiento %>"
+                            >Aceptar Receta</button>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+                         
+        </div>
+    </div>
+    
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- modal escogerdoc -->
+<div class="modal fade" id="notificarModal" tabindex="-1" aria-labelledby="notificarModalLabel" aria-hidden="true" style=" font-family: Quicksand, sans-serif;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notificarModalLabel">Notificación al Doctor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="notificarForm">
+                    <input type="hidden" name="idHistorialClinico" id="idHistorialClinico">
+                    <input type="hidden" name="idC" id="idC">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Nombre del Paciente:</label>
+                        <p id="nombrePaciente" class="form-control bg-light"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Motivo:</label>
+                        <p id="motivo" class="form-control bg-light"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Síntomas:</label>
+                        <p id="sintomas" class="form-control bg-light"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Seleccionar Doctor:</label>
+                        <select class="form-select" id="doctorId" name="doctor" required>
+                            <option value="">Cargando doctores...</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Enviar Notificación</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./js/btn.js"></script>
+
+<!-- modalaceptarreceta-->
+<div class="modal fade" id="aceptarRecetaModal" tabindex="-1" aria-labelledby="aceptarRecetaModalLabel" aria-hidden="true" style=" font-family: Quicksand, sans-serif;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aceptarRecetaModalLabel">Aceptar Receta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="FormatoAceptar">
+                    <input type="hidden" name="idCC" id="idCC">
+
+                    <div class="mb-3">
+                        <label class="form-label">Nombre del Paciente:</label>
+                        <p id="nombrePaciente1" class="form-control bg-light"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Motivo:</label>
+                        <p id="motivo1" class="form-control bg-light"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Síntomas:</label>
+                        <p id="sintomas1" class="form-control bg-light"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Diagnóstico:</label>
+                        <p id="diagnostico" class="form-control bg-light"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tratamiento:</label>
+                        <p id="tratamiento" class="form-control bg-light"></p>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Aceptar Receta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        // Obtener elementos del DOM
+        const notificarBtns = $('.notificar-btn');
+        const notificarForm = $('#notificarForm');
+        const doctorSelect = $('#doctorId');
+        const AceptarRecetasBtns = $('.AceptarRecetas');
+    
+        // Función para cargar los doctores
+        async function cargarDoctores() {
+            try {
+                doctorSelect.html('<option value="">Cargando doctores...</option>');
+                
+                const response = await fetch('/doctores');
+                const doctores = await response.json();
+                
+                if (doctores.length > 0) {
+                    doctorSelect.html('');
+                    doctores.forEach(doctor => {
+                        doctorSelect.append(new Option(`${doctor.Nombres} ${doctor.Apellido}`, doctor.idUsers));
+                    });
+                } else {
+                    doctorSelect.html('<option value="">No hay doctores disponibles</option>');
+                }
+            } catch (error) {
+                console.error('Error al cargar doctores:', error);
+                doctorSelect.html('<option value="">Error al cargar doctores</option>');
+            }
+        }
+    
+        notificarBtns.on('click', async function () {
+            const button = $(this);
+            $('#nombrePaciente').text(button.data('nombre'));
+            $('#motivo').text(button.data('motivo'));
+            $('#sintomas').text(button.data('sintomas'));
+            $('#idHistorialClinico').val(button.data('id'));
+            $('#idC').val(button.data('nose')); 
+            await cargarDoctores();
+            $('#notificarModal').modal('show');
+        });
+    
+        // Manejar el modal de Aceptar Recetas
+        AceptarRecetasBtns.on('click', function () {
+            const button = $(this);
+            $('#nombrePaciente1').text(button.data('nombre1'));
+            $('#motivo1').text(button.data('motivo1'));
+            $('#sintomas1').text(button.data('sintomas1'));
+            $('#diagnostico').text(button.data('diagnostico'));
+            $('#tratamiento').text(button.data('tratamiento'));
+            $('#idCC').val(button.data('nosedos')); 
+            $('#aceptarRecetaModal').modal('show');
+        });
+    });
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
