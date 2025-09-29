@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 
 console.log('Ruta completa del logo:', path.join(__dirname, '.', 'public', 'img', 'logo1.jpg'));
 
-
+//Prueba2
 const pool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
