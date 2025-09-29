@@ -26,7 +26,7 @@ const pool = mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
-
+//comentario
 class Server {
     constructor() {
         this.app = express();
